@@ -14,7 +14,7 @@
 }
 
 @layer components {
-  /* 1. Neumorphism Base */
+  /* 1. Neumorphism Style */
   .neu-flat {
     @apply bg-[#e0e5ec] rounded-2xl shadow-[6px_6px_14px_#b8bec9,-6px_-6px_14px_#ffffff];
   }
@@ -23,17 +23,31 @@
     @apply bg-[#e0e5ec] rounded-2xl shadow-[inset_6px_6px_14px_#b8bec9,inset_-6px_-6px_14px_#ffffff];
   }
 
-  /* 2. Glassmorphism */
+  /* 2. Glassmorphism Style */
   .glass {
     @apply bg-white/30 backdrop-blur-xl border border-white/40 shadow-xl;
   }
 
-  /* 3. Claymorphism / Bento Style */
+  .clay-container-glass {
+    @apply rounded-[2rem] bg-[rgba(255,255,255,0.45)] backdrop-blur-[16px] border border-[rgba(255,255,255,0.6)] 
+           shadow-[16px_16px_36px_rgba(148,163,184,0.08),inset_4px_4px_12px_rgba(255,255,255,1),inset_-4px_-4px_12px_rgba(148,163,184,0.03)];
+  }
+
+  /* 3. Claymorphic Elements */
   .clay-card {
     @apply bg-white rounded-3xl border-2 border-white shadow-[8px_8px_16px_#d1d9e6,-8px_-8px_16px_#ffffff];
   }
 
-  /* 4. Utilities untuk Komponen Tabel/Checkbox */
+  .clay-btn-primary {
+    @apply rounded-[1rem] font-semibold text-white bg-gradient-to-br from-indigo-500 to-indigo-600 
+           shadow-[4px_4px_10px_rgba(79,70,229,0.2),inset_2px_2px_6px_rgba(255,255,255,0.4),inset_-2px_-2px_6px_rgba(0,0,0,0.1)];
+  }
+
+  /* 4. Tabel & Checkbox Modern */
+  .cbt-table {
+    @apply w-full border-collapse overflow-hidden rounded-2xl shadow-sm bg-white;
+  }
+
   .cbt-checkbox {
     @apply appearance-none w-5 h-5 rounded border-2 border-gray-400 bg-white cursor-pointer 
            checked:bg-indigo-600 checked:border-indigo-600 transition-all duration-200 
@@ -41,6 +55,6 @@
   }
 
   .cbt-table-row {
-    @apply transition-colors duration-200 hover:bg-gray-100/50;
+    @apply transition-colors duration-200 hover:bg-gray-100/50 border-b border-gray-100;
   }
 }
