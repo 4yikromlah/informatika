@@ -2981,11 +2981,21 @@ const handleBulkDelete = async () => {
                         className="bg-transparent text-xs text-slate-700 w-full focus:outline-none"
                       />
                     </div>
- 
+
+                    {/* Indikator & Tombol Hapus Massal */}
+                    {selectedStudentIds.length > 0 && (
+                    <div className="flex items-center justify-between p-4 mb-4 bg-white/50 border border-red-200 rounded-2xl shadow-sm animate-fade-in">
+                      <span className="text-sm font-bold text-red-600">{selectedStudentIds.length} Siswa dipilih</span>
+                      <button 
+                      onClick={handleBulkDelete}
+                    className="bg-red-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-700 transition">Hapus Semua Terpilih</button>
+                    </div>)}
+                    
                     <div className="overflow-x-auto rounded-2xl border border-slate-200/40">
                       <table className="w-full text-left border-collapse bg-white/10">
                         <thead>
                           <tr className="bg-slate-200/50 border-b border-slate-300/30">
+                            <th className="p-4 w-12 text-center"><input type="checkbox" className="cbt-checkbox" checked={students.length > 0 && selectedStudentIds.length === students.length} onChange={toggleSelectAllStudents} /></th>
                             <th className="p-3.5 text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider">No</th>
                             <th className="p-3.5 text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider">Nama Siswa</th>
                             <th className="p-3.5 text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider">Mata Pelajaran</th>
