@@ -55,13 +55,42 @@ export default function App() {
       return [];
     }
   });
-  const [students, setStudents] = useState<Student[]>(() => {
-    try {
-      return getStudents();
-    } catch {
-      return [];
+const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
+
+const toggleStudentSelect = (id: string) => {
+  setSelectedStudentIds(prev => 
+    prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+  );
+};
+
+const toggleSelectAllStudents = () => {
+  if (selectedStudentIds.length === students.length && students.length > 0) {
+    setSelectedStudentIds([]);
+  } else {
+    setSelectedStudentIds(students.map(s => s.id));
+  }
+};
+
+const handleBulkDelete = async () => {
+  if (!confirm(`Yakin ingin menghapus ${selectedStudentIds.length} siswa terpilih?`)) return;
+  
+  try {
+    const response = await fetch('/api/students/bulk', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids: selectedStudentIds })
+    });
+    
+    if (response.ok) {
+      // Reload daftar siswa setelah hapus
+      const updatedStudents = await getStudents(); 
+      setStudents(updatedStudents);
+      setSelectedStudentIds([]);
     }
-  });
+  } catch (error) {
+    console.error("Gagal menghapus massal:", error);
+  }
+};
 
   // Navigation / View states
   const [activeScreen, setActiveScreen] = useState<'login' | 'student-dashboard' | 'exam-active' | 'review-screen' | 'admin-dashboard'>(() => {
