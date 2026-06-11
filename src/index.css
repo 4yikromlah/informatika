@@ -7,174 +7,40 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-/* Custom Styles for styling paradigms: Neumorphism, Glassmorphism, and Claymorphism */
-
-.bento-bg {
-  background-color: #e0e5ec;
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.neu-flat {
-  background: #e0e5ec;
-  border-radius: 1.5rem;
-  box-shadow: 6px 6px 14px #b8bec9, -6px -6px 14px #ffffff;
-}
-
-.neu-pressed {
-  background: #e0e5ec;
-  border-radius: 1.5rem;
-  box-shadow: inset 5px 5px 10px #b8bec9, inset -5px -5px 10px #ffffff;
-}
-
-.clay-blue {
-  background: #4dabf7;
-  border-radius: 18px;
-  box-shadow: inset 4px 4px 8px rgba(255,255,255,0.4), inset -4px -4px 8px rgba(0,0,0,0.1), 8px 8px 16px rgba(0,0,0,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-.clay-green {
-  background: #51cf66;
-  border-radius: 12px;
-  box-shadow: inset 3px 3px 6px rgba(255,255,255,0.4), inset -3px -3px 6px rgba(0,0,0,0.1), 4px 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Background gradient animation */
-@keyframes breathing-bg {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+@layer base {
+  body {
+    @apply bg-[#e0e5ec] text-gray-800 antialiased;
   }
 }
 
-.cbt-animated-bg {
-  background: linear-gradient(-45deg, #eef2ff, #f0fdf4, #ecfdf5, #f5f3ff);
-  background-size: 400% 400%;
-  animation: breathing-bg 20s ease infinite;
-}
+@layer components {
+  /* 1. Neumorphism Base */
+  .neu-flat {
+    @apply bg-[#e0e5ec] rounded-2xl shadow-[6px_6px_14px_#b8bec9,-6px_-6px_14px_#ffffff];
+  }
 
-/* 1. Neumorphic inputs & interactive panels */
-.neu-inset {
-  box-shadow: inset 5px 5px 10px #cbd5e1, inset -5px -5px 10px #ffffff;
-}
+  .neu-pressed {
+    @apply bg-[#e0e5ec] rounded-2xl shadow-[inset_6px_6px_14px_#b8bec9,inset_-6px_-6px_14px_#ffffff];
+  }
 
-.neu-outset {
-  box-shadow: 6px 6px 12px #cbd5e1, -6px -6px 12px #ffffff;
-}
+  /* 2. Glassmorphism */
+  .glass {
+    @apply bg-white/30 backdrop-blur-xl border border-white/40 shadow-xl;
+  }
 
-.neu-input {
-  background-color: #f8fafc;
-  border: 1px solid rgba(226, 232, 240, 0.6);
-  box-shadow: inset 2px 2px 5px rgba(148, 163, 184, 0.12), inset -2px -2px 5px rgba(255, 255, 255, 0.7);
-  transition: all 0.2s ease-in-out;
-}
+  /* 3. Claymorphism / Bento Style */
+  .clay-card {
+    @apply bg-white rounded-3xl border-2 border-white shadow-[8px_8px_16px_#d1d9e6,-8px_-8px_16px_#ffffff];
+  }
 
-.neu-input:focus {
-  background-color: #ffffff;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), inset 1px 1px 3px rgba(148, 163, 184, 0.05);
-}
+  /* 4. Utilities untuk Komponen Tabel/Checkbox */
+  .cbt-checkbox {
+    @apply appearance-none w-5 h-5 rounded border-2 border-gray-400 bg-white cursor-pointer 
+           checked:bg-indigo-600 checked:border-indigo-600 transition-all duration-200 
+           focus:outline-none focus:ring-2 focus:ring-indigo-300;
+  }
 
-/* 2. Glassmorphic elements */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.03);
-}
-
-.glass-panel-dark {
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* 3. Claymorphic containers with 3D feel */
-.clay-card {
-  border-radius: 2rem;
-  background: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 
-    12px 12px 24px rgba(165, 180, 252, 0.12), 
-    -12px -12px 24px rgba(255, 255, 255, 0.9),
-    inset 4px 4px 10px rgba(255, 255, 255, 0.9), 
-    inset -4px -4px 10px rgba(0, 0, 0, 0.02);
-}
-
-.clay-container-glass {
-  border-radius: 2rem;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 
-    16px 16px 36px rgba(148, 163, 184, 0.08), 
-    inset 4px 4px 12px rgba(255, 255, 255, 1), 
-    inset -4px -4px 12px rgba(148, 163, 184, 0.03);
-}
-
-/* Claymorphic Buttons */
-.clay-btn-primary {
-  border-radius: 1rem;
-  font-weight: 600;
-  color: #ffffff;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  box-shadow: 
-    4px 4px 10px rgba(79, 70, 229, 0.2),
-    inset 2px 2px 6px rgba(255, 255, 255, 0.4),
-    inset -2px -2px 6px rgba(0, 0, 0, 0.15);
-  border-bottom: 4px solid #3730a3;
-  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.clay-btn-primary:hover {
-  background: linear-gradient(135deg, #4f46e5, #4338ca);
-  transform: translateY(-1px);
-}
-
-.clay-btn-primary:active {
-  transform: translateY(3px);
-  border-bottom-width: 1px;
-}
-
-/* Simple animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Touch targets and scrolling overrides */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  .cbt-table-row {
+    @apply transition-colors duration-200 hover:bg-gray-100/50;
+  }
 }
